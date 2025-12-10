@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="320" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+  <title>야붕카 리모컨 UI - 240x320 Portrait</title>
+  
+  <!-- 배경 -->
+  <rect width="240" height="320" fill="#000000"/>
+  
+  <!-- 헤더 영역 (0-60) -->
+  <g id="header">
+    <!-- 타이틀 배경 -->
+    <rect x="0" y="0" width="240" height="60" fill="#001a33"/>
+    
+    <!-- 타이틀 텍스트 (48x48 한글 - 3x 스케일) -->
+    <text x="120" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" 
+          fill="#00FFFF" text-anchor="middle">YCB AI 전동차</text>
+  </g>
+  
+  <!-- 속도 표시 영역 (60-180) - 중심부 -->
+  <g id="speed-display">
+    <!-- 속도 배경 -->
+    <rect x="10" y="65" width="220" height="110" rx="5" fill="#001a1a" stroke="#00FFFF" stroke-width="2"/>
+    
+    <!-- 속도 값 (72pt - 4x 스케일) -->
+    <text x="120" y="135" font-family="Arial, sans-serif" font-size="64" font-weight="bold" 
+          fill="#00FF00" text-anchor="middle">25</text>
+    
+    <!-- km/h 단위 -->
+    <text x="120" y="160" font-family="Arial, sans-serif" font-size="16" 
+          fill="#00FFFF" text-anchor="middle">km/h</text>
+  </g>
+  
+  <!-- 방향 표시 영역 (180-215) -->
+  <g id="direction-display">
+    <!-- 방향 아이콘 배경 -->
+    <rect x="80" y="185" width="80" height="25" rx="3" fill="#1a1a00"/>
+    
+    <!-- 정지 아이콘 (● 정지) -->
+    <circle cx="95" cy="197.5" r="6" fill="#FFFF00"/>
+    <text x="110" y="202" font-family="Arial, sans-serif" font-size="16" 
+          fill="#FFFF00">정지</text>
+    
+    <!-- 전진 아이콘 예시 (▲ 전진) - 주석 처리 -->
+    <!-- <path d="M 95 188 L 88 200 L 102 200 Z" fill="#00FF00"/>
+    <text x="110" y="202" font-family="Arial, sans-serif" font-size="16" 
+          fill="#00FF00">전진</text> -->
+    
+    <!-- 후진 아이콘 예시 (▼ 후진) - 주석 처리 -->
+    <!-- <path d="M 95 206 L 88 194 L 102 194 Z" fill="#FF0000"/>
+    <text x="110" y="202" font-family="Arial, sans-serif" font-size="16" 
+          fill="#FF0000">후진</text> -->
+  </g>
+  
+  <!-- 배터리 게이지 영역 (272-292) -->
+  <g id="battery-gauge">
+    <!-- 배터리 게이지 외곽 -->
+    <rect x="10" y="272" width="220" height="18" rx="3" fill="#000000" stroke="#FFFFFF" stroke-width="1"/>
+    
+    <!-- 배터리 게이지 내부 (85% 예시) -->
+    <rect x="12" y="274" width="185" height="14" rx="2" fill="#00FF00"/>
+    
+    <!-- 배터리 퍼센트 텍스트 -->
+    <text x="120" y="285" font-family="Arial, sans-serif" font-size="12" font-weight="bold"
+          fill="#000000" text-anchor="middle">85%</text>
+  </g>
+  
+  <!-- 온도 및 전류 표시 영역 (220-255) -->
+  <g id="status-info">
+    <!-- 첫 번째 줄: 모터, FET -->
+    <g id="temp-row">
+      <!-- 모터 온도 -->
+      <text x="10" y="228" font-family="Arial, sans-serif" font-size="11" fill="#AAAAAA">모터</text>
+      <text x="50" y="228" font-family="Arial, sans-serif" font-size="16" font-weight="bold"
+            fill="#00FF00">65°C</text>
+      
+      <!-- FET 온도 -->
+      <text x="135" y="228" font-family="Arial, sans-serif" font-size="11" fill="#AAAAAA">FET</text>
+      <text x="165" y="228" font-family="Arial, sans-serif" font-size="16" font-weight="bold"
+            fill="#FFFF00">72°C</text>
+    </g>
+    
+    <!-- 두 번째 줄: 전류 -->
+    <g id="current-row">
+      <text x="10" y="248" font-family="Arial, sans-serif" font-size="11" fill="#AAAAAA">전류</text>
+      <text x="50" y="248" font-family="Arial, sans-serif" font-size="16" font-weight="bold"
+            fill="#00FFFF">15.3A</text>
+    </g>
+  </g>
+  
+  <!-- 배터리 레이블 -->
+  <text x="10" y="268" font-family="Arial, sans-serif" font-size="11" fill="#FFFFFF">배터리</text>
+  
+  <!-- 푸터 영역 (285-320) -->
+  <g id="footer">
+    <!-- 연결 상태 -->
+  <!-- 푸터 영역 (295-320) -->
+  <g id="footer">
+    <!-- 연결 상태 -->
+    <g id="connection-status">
+      <circle cx="20" cy="303" r="5" fill="#00FF00"/>
+      <text x="30" y="307" font-family="Arial, sans-serif" font-size="11" fill="#FFFFFF">연결됨</text>
+    </g>
+    
+    <!-- RSSI -->
+    <g id="rssi">
+      <text x="110" y="307" font-family="Arial, sans-serif" font-size="11" fill="#FFFFFF">RSSI: -45 dBm</text>
+    </g>
+    
+    <!-- 설정 힌트 -->
+    <text x="120" y="318" font-family="Arial, sans-serif" font-size="9" 
+          fill="#666666" text-anchor="middle">SELECT 3초 길게 누르면 설정</text>
+  </g>d="grid-guide" opacity="0.2">
+    <!-- 가로선 -->
+    <line x1="0" y1="60" x2="240" y2="60" stroke="#FF00FF" stroke-width="0.5"/>
+    <line x1="0" y1="180" x2="240" y2="180" stroke="#FF00FF" stroke-width="0.5"/>
+    <line x1="0" y1="215" x2="240" y2="215" stroke="#FF00FF" stroke-width="0.5"/>
+    <line x1="0" y1="245" x2="240" y2="245" stroke="#FF00FF" stroke-width="0.5"/>
+    <line x1="0" y1="285" x2="240" y2="285" stroke="#FF00FF" stroke-width="0.5"/>
+    
+    <!-- 세로 중심선 -->
+    <line x1="120" y1="0" x2="120" y2="320" stroke="#FF00FF" stroke-width="0.5"/>
+  </g>
+  
+  <!-- 설명 주석 -->
+  <defs>
+    <style>
+      /* 색상 팔레트 */
+      /* Background: #000000 (검정) */
+      /* Header BG: #001a33 (진한 파랑) */
+      /* Primary Text: #00FFFF (시안) */
+      /* Speed: #00FF00 (초록) */
+      /* Warning: #FFFF00 (노랑) */
+      /* Danger: #FF0000 (빨강) */
+      /* Info: #FFFFFF (흰색) */
+      /* Dim: #AAAAAA (회색) */
+    </style>
+  </defs>
+  
+  <!-- 레이아웃 정보 -->
+  <!-- 
+  영역 구분:
+  - Header: 0-60 (타이틀)
+  - Speed: 60-180 (초대형 속도 표시)
+  - Direction: 180-215 (방향 아이콘)
+  - Battery: 215-245 (배터리 게이지)
+  - Status: 245-285 (온도/전류)
+  - Footer: 285-320 (연결/RSSI/힌트)
+  
+  색상 규칙:
+  - 온도 < 70°C: 초록(#00FF00)
+  - 온도 70-80°C: 노랑(#FFFF00)
+  - 온도 > 80°C: 빨강(#FF0000)
+  - 전류: 시안(#00FFFF)
+  - 방향 정지: 노랑(#FFFF00)
+  - 방향 전진: 초록(#00FF00)
+  - 방향 후진: 빨강(#FF0000)
+  -->
+</svg>
