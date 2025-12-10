@@ -1,4 +1,4 @@
-﻿# ESP32 WROOM 차량 수신기 (ESP-NOW + CAN + LCD)
+﻿# ESP32 Micro Hub - 차량 수신기 (ESP-NOW + CAN + LCD)
 
 ESP32 WROOM 모듈을 사용한 ESP-NOW 및 CAN 통신 기반 운반차 수신기 프로젝트입니다.
 
