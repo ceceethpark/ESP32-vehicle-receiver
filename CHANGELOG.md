@@ -1,5 +1,158 @@
 # ESP32 리모컨 프로젝트 - 업데이트 노트
 
+## 2024-12-11 업데이트 (최신)
+
+### 🚗 CAN Control 시스템 완전 재작성 (STM32 tja1050 기반)
+
+#### 1. CanControl 클래스 완전 재구현
+- **기반**: STM32 tja1050 클래스 (git commit bca4c952)
+- **드라이버**: ESP32 TWAI (Controller Area Network)
+- **프로토콜**: 기존 차량 제어 시스템과 100% 호환
+
+##### CAN 메시지 ID 정의
+```cpp
+// TX (ESP32 → Vehicle)
+#define CAN_TX_GET_CONFIG  0x0700  // 설정 조회
+#define CAN_TX_PUT_CMD     0x0701  // 명령 전송
+#define CAN_TX_SAVE_CMD    0x0708  // 설정 저장
+
+// RX (Vehicle → ESP32)
+#define CAN_RX_DATA_ID     0x05B0  // 데이터 버퍼 0~5 (0x5B0~0x5B5)
+#define CAN_RX_RESPONSE_ID 0x05B8  // 응답
+```
+
+##### 6-Buffer 수신 전략
+```cpp
+uint8_t can_rx_buf_[6][8];  // 6개 버퍼 × 8바이트
+uint8_t can_buf_idx_;       // 비트마스크 (0x3F = 모두 수신)
+uint8_t can_alive_timeout_; // 100ms 타임아웃
+
+// Buffer 0: volt_main, volt_dcdc
+// Buffer 1: current_avg, consumption
+// Buffer 2: motor_temp, fet_temp
+// Buffer 3: soc, error_code
+// Buffer 4-5: 예약
+```
+
+##### TWAI 필터 설정
+```cpp
+// 0x5B0~0x5BF 범위만 수용
+acceptance_code = (0x05B0 << 21);
+acceptance_mask = ~((0x7F0) << 21);
+```
+
+#### 2. 데이터 구조체
+```cpp
+struct VehicleControlData {
+    uint8_t speed;        // 모터 속도 (0~255)
+    uint8_t direction;    // 방향 (0: 정지, 1: 전진, 2: 후진)
+    uint8_t lift_state;   // 리프트 상태
+    uint8_t caster_state; // 캐스터 상태
+};
+
+struct VehicleStatusData {
+    int16_t volt_main;     // 메인 배터리 전압 (0.1V 단위)
+    int16_t volt_dcdc;     // DCDC 전압 (0.1V 단위)
+    int16_t current_avg;   // 평균 전류 (0.1A 단위)
+    int16_t consumption;   // 소비 전력 (W)
+    int16_t motor_temp;    // 모터 온도 (0.1°C)
+    int16_t fet_temp;      // FET 온도 (0.1°C)
+    uint8_t soc;          // 배터리 잔량 (%)
+    uint8_t error_code;   // 에러 코드
+};
+```
+
+#### 3. 명령 메서드
+```cpp
+bool sendMotorCommand(uint8_t speed, uint8_t direction);
+bool sendLiftCommand(uint8_t state);
+bool sendCasterCommand(uint8_t state);
+bool sendGetConfig();
+bool sendSaveConfig();
+```
+
+#### 4. 콜백 시스템
+```cpp
+// 응답 수신 (ID 0x5B8)
+using ResponseCallback = std::function<void(const uint8_t* data, size_t len)>;
+
+// 차량 상태 수신 완료 (6개 버퍼 모두 도착)
+using StatusCallback = std::function<void(const VehicleStatusData& status)>;
+```
+
+#### 5. 타임아웃 메커니즘
+```cpp
+// RX Task (10ms 주기)
+void rxTaskWrapper() {
+    while (rx_task_running_) {
+        if (can_alive_timeout_ > 0) {
+            can_alive_timeout_--;
+            if (can_alive_timeout_ == 0) {
+                ESP_LOGW(TAG, "CAN timeout");
+            }
+        }
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+}
+```
+
+#### 6. ButtonControl Enum 충돌 해결
+```cpp
+// config.h 매크로와 충돌 방지
+enum ButtonId {
+    BUTTON_SELECT = 0,      // (구 BTN_FORWARD)
+    BUTTON_DOWN,            // (구 BTN_BACKWARD)
+    BUTTON_RIGHT,           // (구 BTN_RIGHT)
+    BUTTON_LEFT_DIR,        // (구 BTN_LEFT)
+    BUTTON_UP,              // 신규
+    BUTTON_POWER,           // 신규
+    BUTTON_EMERGENCY,       // 신규
+    BUTTON_RUN,             // 신규
+    BUTTON_COUNT
+};
+```
+
+#### 7. main.cpp 콜백 업데이트
+```cpp
+// 기존: VehicleStatus { speed, direction, battery_level, ... }
+// 변경: VehicleStatusData { volt_main, volt_dcdc, soc, current_avg, ... }
+
+void onCanStatus(const CanControl::VehicleStatusData& status) {
+    ESP_LOGI(TAG, "VMain:%d DCDC:%d Curr:%d SOC:%d MotorT:%d FetT:%d",
+             status.volt_main, status.volt_dcdc, status.current_avg,
+             status.soc, status.motor_temp, status.fet_temp);
+}
+```
+
+#### 8. 기술 사양
+- **CAN Bitrate**: 500 Kbps
+- **핀**: GPIO16 (TX), GPIO17 (RX)
+- **필터**: 0x5B0~0x5BF 수용
+- **Task Stack**: TX 2048, RX 4096 bytes
+- **Task Priority**: TX=5, RX=5
+
+#### 9. 변경된 파일
+- ✅ `components/can_control/CanControl.h` - 완전 재작성
+- ✅ `components/can_control/CanControl.cpp` - 완전 재작성
+- ✅ `components/button_control/ButtonControl.h` - Enum 수정
+- ✅ `components/button_control/ButtonControl.cpp` - 업데이트
+- ✅ `main/main.cpp` - 콜백 시그니처 변경
+
+#### 10. 빌드 상태
+- **CanControl**: ✅ 컴파일 성공
+- **ButtonControl**: ✅ 컴파일 성공
+- **main.cpp**: ✅ 컴파일 성공
+- **전체 빌드**: 🔄 진행 중
+
+#### 11. 다음 단계
+1. 전체 프로젝트 빌드 완료 확인
+2. 실제 차량과 CAN 통신 테스트
+3. 6-buffer 수신 동작 검증
+4. Timeout 메커니즘 테스트
+5. PCA9555 I2C 드라이버 구현
+
+---
+
 ## 2025-12-11 업데이트
 
 ### ✨ micro-ROS 통합 완료

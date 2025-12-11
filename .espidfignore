@@ -1,0 +1,14 @@
+# ESP-IDF에서 무시할 디렉토리
+src/
+src_arduino/
+include_arduino/
+lib_arduino/
+examples/
+docs/
+*.md
+*.py
+*.sh
+*.ps1
+Dockerfile
+docker-build-internal.sh
+build-with-docker.*

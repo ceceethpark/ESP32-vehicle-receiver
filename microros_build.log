@@ -1,0 +1,1148 @@
+=======================================
+micro-ROS WSL2 빌드 시작
+=======================================
+
+1단계: 이전 빌드 정리 중...
+2단계: ESP-IDF 환경 설정 중...
+ESP-IDF 경로: /home/p/esp/esp-idf
+Detecting the Python interpreter
+Checking "python3" ...
+Python 3.10.12
+"python3" has been detected
+Checking Python compatibility
+Checking other ESP-IDF version.
+Adding ESP-IDF tools to PATH...
+Checking if Python packages are up to date...
+Python requirements are satisfied.
+Constraint file: /home/p/.espressif/espidf.constraints.v5.2.txt
+Requirement files:
+ - /home/p/esp/esp-idf/tools/requirements/requirements.core.txt
+Python being checked: /home/p/.espressif/python_env/idf5.2_py3.10_env/bin/python
+Added the following directories to PATH:
+  /home/p/esp/esp-idf/components/espcoredump
+  /home/p/esp/esp-idf/components/partition_table
+  /home/p/esp/esp-idf/components/app_update
+  /home/p/.espressif/tools/xtensa-esp-elf-gdb/12.1_20231023/xtensa-esp-elf-gdb/bin
+  /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin
+  /home/p/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin
+  /home/p/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin
+  /home/p/.espressif/tools/xtensa-esp-elf-gdb/12.1_20231023/xtensa-esp-elf-gdb/bin
+  /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin
+  /home/p/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin
+  /home/p/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin
+  /home/p/.espressif/python_env/idf5.2_py3.10_env/bin
+  /home/p/esp/esp-idf/tools
+Done! You can now compile ESP-IDF projects.
+Go to the project directory and run:
+
+  idf.py build
+
+2.5단계: Python 패키지 설치 중...
+Requirement already satisfied: catkin_pkg in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (1.1.0)
+Requirement already satisfied: lark-parser in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (0.12.0)
+Requirement already satisfied: colcon-common-extensions in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (0.3.0)
+Requirement already satisfied: docutils in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from catkin_pkg) (0.22.3)
+Requirement already satisfied: packaging in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from catkin_pkg) (25.0)
+Requirement already satisfied: python-dateutil in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from catkin_pkg) (2.9.0.post0)
+Requirement already satisfied: pyparsing in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from catkin_pkg) (3.2.5)
+Requirement already satisfied: setuptools in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from catkin_pkg) (79.0.1)
+Requirement already satisfied: colcon-cmake in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.29)
+Requirement already satisfied: colcon-core in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.20.1)
+Requirement already satisfied: colcon-defaults in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.9)
+Requirement already satisfied: colcon-devtools in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.3.0)
+Requirement already satisfied: colcon-library-path in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.1)
+Requirement already satisfied: colcon-metadata in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.5)
+Requirement already satisfied: colcon-notification in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.3.0)
+Requirement already satisfied: colcon-output in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.13)
+Requirement already satisfied: colcon-package-information in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.4.0)
+Requirement already satisfied: colcon-package-selection in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.10)
+Requirement already satisfied: colcon-parallel-executor in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.4.0)
+Requirement already satisfied: colcon-powershell in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.4.0)
+Requirement already satisfied: colcon-python-setup-py in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.9)
+Requirement already satisfied: colcon-recursive-crawl in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.2.3)
+Requirement already satisfied: colcon-ros in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.5.0)
+Requirement already satisfied: colcon-test-result in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.3.8)
+Requirement already satisfied: colcon-argcomplete in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.3.3)
+Requirement already satisfied: colcon-bash in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.5.0)
+Requirement already satisfied: colcon-cd in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.1.1)
+Requirement already satisfied: colcon-zsh in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-common-extensions) (0.5.0)
+Requirement already satisfied: argcomplete in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-argcomplete->colcon-common-extensions) (3.6.3)
+Requirement already satisfied: distlib in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (0.4.0)
+Requirement already satisfied: EmPy in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (4.2)
+Requirement already satisfied: pytest in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (9.0.2)
+Requirement already satisfied: pytest-cov in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (7.0.0)
+Requirement already satisfied: pytest-repeat in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (0.9.4)
+Requirement already satisfied: pytest-rerunfailures in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (16.1)
+Requirement already satisfied: tomli>=1.0.0 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-core->colcon-common-extensions) (2.3.0)
+Requirement already satisfied: PyYAML in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-defaults->colcon-common-extensions) (6.0.3)
+Requirement already satisfied: notify2 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-notification->colcon-common-extensions) (0.3.1)
+Requirement already satisfied: colcon-pkg-config in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from colcon-ros->colcon-common-extensions) (0.1.0)
+Requirement already satisfied: exceptiongroup>=1 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from pytest->colcon-core->colcon-common-extensions) (1.3.1)
+Requirement already satisfied: iniconfig>=1.0.1 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from pytest->colcon-core->colcon-common-extensions) (2.3.0)
+Requirement already satisfied: pluggy<2,>=1.5 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from pytest->colcon-core->colcon-common-extensions) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from pytest->colcon-core->colcon-common-extensions) (2.19.2)
+Requirement already satisfied: typing-extensions>=4.6.0 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->colcon-core->colcon-common-extensions) (4.15.0)
+Requirement already satisfied: coverage>=7.10.6 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from coverage[toml]>=7.10.6->pytest-cov->colcon-core->colcon-common-extensions) (7.13.0)
+Requirement already satisfied: six>=1.5 in /home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages (from python-dateutil->catkin_pkg) (1.17.0)
+3단계: 툴체인 경로 설정 중...
+툴체인: /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf
+컴파일러: /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc
+4단계: micro-ROS 빌드 시작 (15-20분 소요)...
+rm -f /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/esp32_toolchain.cmake; \
+cat /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/esp32_toolchain.cmake.in | \
+	sed "s/@CMAKE_C_COMPILER@/\/home\/p\/.espressif\/tools\/xtensa-esp-elf\/esp-13.2.0_20230928\/xtensa-esp-elf\/bin\/xtensa-esp32-elf-gcc/g" | \
+	sed "s/@CMAKE_CXX_COMPILER@/\/home\/p\/.espressif\/tools\/xtensa-esp-elf\/esp-13.2.0_20230928\/xtensa-esp-elf\/bin\/xtensa-esp32-elf-g++/g" | \
+	sed "s/@CFLAGS@/ -ffunction-sections -fdata-sections/g" | \
+	sed "s/@CXXFLAGS@/ -ffunction-sections -fdata-sections/g" | \
+	sed "s/@IDF_TARGET@/esp32/g" | \
+	sed "s/@IDF_PATH@/\/home\/p\/esp\/esp-idf/g" | \
+	sed "s/@BUILD_CONFIG_DIR@/\/mnt\/c\/Users\/thpark\/SynologyDrive\/6k2jvr_work\/prj_ESP32\/esp32_micro_hub\/components\/micro_ros_espidf_component\/build\/config/g" \
+	> /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/esp32_toolchain.cmake
+rm -rf micro_ros_dev; \
+mkdir micro_ros_dev; cd micro_ros_dev; \
+git clone -b kilted https://github.com/ament/ament_cmake src/ament_cmake; \
+git clone -b kilted https://github.com/ament/ament_lint src/ament_lint; \
+git clone -b kilted https://github.com/ament/ament_package src/ament_package; \
+git clone -b kilted https://github.com/ament/googletest src/googletest; \
+git clone -b kilted https://github.com/ros2/ament_cmake_ros src/ament_cmake_ros; \
+git clone -b kilted https://github.com/ament/ament_index src/ament_index; \
+touch src/ament_cmake_ros/rmw_test_fixture_implementation/COLCON_IGNORE; \
+colcon build --cmake-args -DBUILD_TESTING=OFF -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=gcc;
+Cloning into 'src/ament_cmake'...
+Updating files:  69% (166/238)Updating files:  70% (167/238)Updating files:  71% (169/238)Updating files:  72% (172/238)Updating files:  73% (174/238)Updating files:  74% (177/238)Updating files:  75% (179/238)Updating files:  76% (181/238)Updating files:  77% (184/238)Updating files:  78% (186/238)Updating files:  79% (189/238)Updating files:  80% (191/238)Updating files:  81% (193/238)Updating files:  82% (196/238)Updating files:  83% (198/238)Updating files:  84% (200/238)Updating files:  85% (203/238)Updating files:  86% (205/238)Updating files:  87% (208/238)Updating files:  88% (210/238)Updating files:  89% (212/238)Updating files:  90% (215/238)Updating files:  91% (217/238)Updating files:  92% (219/238)Updating files:  93% (222/238)Updating files:  94% (224/238)Updating files:  95% (227/238)Updating files:  96% (229/238)Updating files:  97% (231/238)Updating files:  98% (234/238)Updating files:  99% (236/238)Updating files: 100% (238/238)Updating files: 100% (238/238), done.
+Cloning into 'src/ament_lint'...
+Updating files:  46% (170/365)Updating files:  47% (172/365)Updating files:  48% (176/365)Updating files:  49% (179/365)Updating files:  50% (183/365)Updating files:  51% (187/365)Updating files:  52% (190/365)Updating files:  53% (194/365)Updating files:  54% (198/365)Updating files:  55% (201/365)Updating files:  56% (205/365)Updating files:  57% (209/365)Updating files:  58% (212/365)Updating files:  59% (216/365)Updating files:  60% (219/365)Updating files:  61% (223/365)Updating files:  62% (227/365)Updating files:  63% (230/365)Updating files:  64% (234/365)Updating files:  65% (238/365)Updating files:  66% (241/365)Updating files:  67% (245/365)Updating files:  68% (249/365)Updating files:  69% (252/365)Updating files:  70% (256/365)Updating files:  71% (260/365)Updating files:  72% (263/365)Updating files:  73% (267/365)Updating files:  74% (271/365)Updating files:  75% (274/365)Updating files:  76% (278/365)Updating files:  77% (282/365)Updating files:  78% (285/365)Updating files:  79% (289/365)Updating files:  79% (291/365)Updating files:  80% (292/365)Updating files:  81% (296/365)Updating files:  82% (300/365)Updating files:  83% (303/365)Updating files:  84% (307/365)Updating files:  85% (311/365)Updating files:  86% (314/365)Updating files:  87% (318/365)Updating files:  88% (322/365)Updating files:  89% (325/365)Updating files:  90% (329/365)Updating files:  91% (333/365)Updating files:  92% (336/365)Updating files:  93% (340/365)Updating files:  94% (344/365)Updating files:  95% (347/365)Updating files:  96% (351/365)Updating files:  97% (355/365)Updating files:  98% (358/365)Updating files:  99% (362/365)Updating files: 100% (365/365)Updating files: 100% (365/365), done.
+Cloning into 'src/ament_package'...
+Cloning into 'src/googletest'...
+Updating files:  60% (155/255)Updating files:  61% (156/255)Updating files:  62% (159/255)Updating files:  63% (161/255)Updating files:  64% (164/255)Updating files:  65% (166/255)Updating files:  66% (169/255)Updating files:  67% (171/255)Updating files:  68% (174/255)Updating files:  69% (176/255)Updating files:  70% (179/255)Updating files:  71% (182/255)Updating files:  72% (184/255)Updating files:  73% (187/255)Updating files:  74% (189/255)Updating files:  75% (192/255)Updating files:  76% (194/255)Updating files:  77% (197/255)Updating files:  78% (199/255)Updating files:  79% (202/255)Updating files:  80% (204/255)Updating files:  81% (207/255)Updating files:  82% (210/255)Updating files:  83% (212/255)Updating files:  84% (215/255)Updating files:  85% (217/255)Updating files:  86% (220/255)Updating files:  87% (222/255)Updating files:  88% (225/255)Updating files:  89% (227/255)Updating files:  90% (230/255)Updating files:  91% (233/255)Updating files:  92% (235/255)Updating files:  93% (238/255)Updating files:  94% (240/255)Updating files:  95% (243/255)Updating files:  96% (245/255)Updating files:  97% (248/255)Updating files:  98% (250/255)Updating files:  99% (253/255)Updating files: 100% (255/255)Updating files: 100% (255/255), done.
+Cloning into 'src/ament_cmake_ros'...
+Cloning into 'src/ament_index'...
+Updating files:  90% (83/92)Updating files:  91% (84/92)Updating files:  92% (85/92)Updating files:  93% (86/92)Updating files:  94% (87/92)Updating files:  95% (88/92)Updating files:  96% (89/92)Updating files:  97% (90/92)Updating files:  98% (91/92)Updating files: 100% (92/92)Updating files: 100% (92/92), done.
+Starting >>> ament_package
+Starting >>> ament_lint
+Starting >>> gtest_vendor
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_lint
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_lint [4.39s]
+Starting >>> ament_flake8
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: gtest_vendor
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< gtest_vendor [5.98s]
+Starting >>> gmock_vendor
+Finished <<< ament_package [8.31s]
+Starting >>> ament_cmake_core
+--- stderr: gmock_vendor
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< gmock_vendor [4.41s]
+--- stderr: ament_flake8
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_flake8 [7.01s]
+Starting >>> ament_pep257
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_pep257
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_pep257 [7.40s]
+Starting >>> ament_copyright
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_cmake_core
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_core [14.0s]
+Starting >>> ament_cmake_python
+Starting >>> ament_cmake_libraries
+Starting >>> ament_cmake_export_libraries
+Starting >>> ament_cmake_include_directories
+Starting >>> ament_cmake_export_definitions
+Starting >>> ament_cmake_export_include_directories
+Starting >>> ament_cmake_export_link_flags
+Starting >>> ament_cmake_version
+--- stderr: ament_cmake_libraries
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_libraries [11.4s]
+Starting >>> ament_cmake_export_dependencies
+--- stderr: ament_cmake_version
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_version [12.0s]
+--- stderr: ament_cmake_export_definitions
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_definitions [12.7s]
+--- stderr: ament_cmake_export_libraries
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_libraries [13.3s]
+--- stderr: ament_cmake_export_link_flags
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_link_flags [13.8s]
+--- stderr: ament_cmake_python
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_python [14.5s]
+Starting >>> ament_cmake_test
+Starting >>> ament_cmake_export_interfaces
+Starting >>> ament_cmake_export_targets
+--- stderr: ament_cmake_export_include_directories
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_include_directories [15.2s]
+--- stderr: ament_cmake_include_directories
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_include_directories [15.7s]
+Starting >>> ament_cmake_target_dependencies
+--- stderr: ament_copyright
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_copyright [20.9s]
+Starting >>> ament_xmllint
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_cmake_export_interfaces
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_interfaces [12.5s]
+--- stderr: ament_cmake_export_dependencies
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_dependencies [16.1s]
+--- stderr: ament_cmake_export_targets
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_export_targets [13.6s]
+--- stderr: ament_cmake_target_dependencies
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_target_dependencies [14.7s]
+--- stderr: ament_cmake_test
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_test [17.2s]
+Starting >>> ament_cmake_gtest
+Starting >>> ament_lint_auto
+Starting >>> ament_cmake_pytest
+Starting >>> ament_cmake_google_benchmark
+Starting >>> ament_cmake_vendor_package
+--- stderr: ament_xmllint
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_xmllint [21.0s]
+Starting >>> ament_lint_cmake
+Starting >>> ament_pycodestyle
+Starting >>> ament_cpplint
+Starting >>> ament_mypy
+Starting >>> ament_clang_format
+Starting >>> ament_clang_tidy
+Starting >>> ament_pclint
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_lint_auto
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_lint_auto [16.1s]
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+Starting >>> domain_coordinator
+--- stderr: ament_cmake_pytest
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_pytest [25.9s]
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_cmake_gtest
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_gtest [31.0s]
+--- stderr: ament_cmake_vendor_package
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_vendor_package [31.5s]
+Starting >>> ament_cmake_gen_version_h
+Starting >>> ament_cmake_gmock
+--- stderr: ament_cmake_google_benchmark
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_google_benchmark [32.7s]
+--- stderr: ament_clang_format
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_clang_format [33.2s]
+--- stderr: ament_clang_tidy
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_clang_tidy [33.6s]
+--- stderr: ament_pycodestyle
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_pycodestyle [34.8s]
+--- stderr: ament_lint_cmake
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_lint_cmake [35.4s]
+--- stderr: ament_cpplint
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_cpplint [35.9s]
+--- stderr: ament_mypy
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_mypy [36.3s]
+Starting >>> ament_cmake_lint_cmake
+Starting >>> ament_cppcheck
+Starting >>> ament_uncrustify
+Starting >>> ament_pyflakes
+Starting >>> ament_index_python
+--- stderr: domain_coordinator
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< domain_coordinator [20.6s]
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+Finished <<< ament_pclint [44.2s]
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+--- stderr: ament_cmake_gmock
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_gmock [27.1s]
+Finished <<< ament_cmake_gen_version_h [27.8s]
+Starting >>> ament_cmake
+--- stderr: ament_pyflakes
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_pyflakes [22.8s]
+--- stderr: ament_cppcheck
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_cppcheck [23.6s]
+--- stderr: ament_uncrustify
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_uncrustify [24.5s]
+--- stderr: ament_index_python
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/home/p/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+---
+Finished <<< ament_index_python [27.4s]
+--- stderr: ament_cmake_lint_cmake
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_lint_cmake [32.7s]
+Starting >>> ament_cmake_copyright
+--- stderr: ament_cmake
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake [20.7s]
+Starting >>> ament_cmake_auto
+--- stderr: ament_cmake_copyright
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+gmake[1]: Warning: File 'Makefile' has modification time 0.35 s in the future
+gmake[2]: Warning: File 'CMakeFiles/Makefile2' has modification time 0.26 s in the future
+gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
+---
+Finished <<< ament_cmake_copyright [19.4s]
+Starting >>> ament_cmake_cppcheck
+Starting >>> ament_cmake_cpplint
+Starting >>> ament_cmake_flake8
+Starting >>> ament_cmake_pep257
+Starting >>> ament_cmake_uncrustify
+Starting >>> ament_cmake_xmllint
+Starting >>> ament_cmake_clang_format
+Starting >>> ament_cmake_clang_tidy
+Starting >>> ament_cmake_mypy
+Starting >>> ament_cmake_pclint
+Starting >>> ament_cmake_pycodestyle
+--- stderr: ament_cmake_auto
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_auto [36.1s]
+Starting >>> ament_cmake_pyflakes
+--- stderr: ament_cmake_pep257
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_pep257 [33.7s]
+--- stderr: ament_cmake_xmllint
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_xmllint [34.3s]
+--- stderr: ament_cmake_flake8
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_flake8 [35.7s]
+--- stderr: ament_cmake_cpplint
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_cpplint [38.5s]
+--- stderr: ament_cmake_pclint
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_pclint [38.7s]
+--- stderr: ament_cmake_mypy
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_mypy [39.3s]
+--- stderr: ament_cmake_clang_format
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_clang_format [40.1s]
+--- stderr: ament_cmake_pycodestyle
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_pycodestyle [40.2s]
+--- stderr: ament_cmake_clang_tidy
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_clang_tidy [40.8s]
+--- stderr: ament_cmake_uncrustify
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_uncrustify [42.7s]
+--- stderr: ament_cmake_cppcheck
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_cppcheck [43.3s]
+Starting >>> ament_lint_common
+--- stderr: ament_cmake_pyflakes
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+gmake[1]: Warning: File 'Makefile' has modification time 0.095 s in the future
+gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
+---
+Finished <<< ament_cmake_pyflakes [34.1s]
+--- stderr: ament_lint_common
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_lint_common [32.6s]
+Starting >>> ament_cmake_ros_core
+Starting >>> ament_index_cpp
+--- stderr: ament_cmake_ros_core
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< ament_cmake_ros_core [30.7s]
+Starting >>> ament_cmake_ros
+Starting >>> rmw_test_fixture
+Finished <<< ament_index_cpp [52.8s]
+--- stderr: rmw_test_fixture
+CMake Error at CMakeLists.txt:6 (find_package):
+  By not providing "Findrmw.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "rmw", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "rmw" with any of
+  the following names:
+
+    rmwConfig.cmake
+    rmw-config.cmake
+
+  Add the installation prefix of "rmw" to CMAKE_PREFIX_PATH or set "rmw_DIR"
+  to a directory containing one of the above files.  If "rmw" provides a
+  separate development package or SDK, be sure it has been installed.
+
+
+---
+Failed   <<< rmw_test_fixture [43.3s, exited with code 1]
+Aborted  <<< ament_cmake_ros [46.4s]
+
+Summary: 60 packages finished [5min 6s]
+  1 package failed: rmw_test_fixture
+  1 package aborted: ament_cmake_ros
+  58 packages had stderr output: ament_clang_format ament_clang_tidy ament_cmake ament_cmake_auto ament_cmake_clang_format ament_cmake_clang_tidy ament_cmake_copyright ament_cmake_core ament_cmake_cppcheck ament_cmake_cpplint ament_cmake_export_definitions ament_cmake_export_dependencies ament_cmake_export_include_directories ament_cmake_export_interfaces ament_cmake_export_libraries ament_cmake_export_link_flags ament_cmake_export_targets ament_cmake_flake8 ament_cmake_gmock ament_cmake_google_benchmark ament_cmake_gtest ament_cmake_include_directories ament_cmake_libraries ament_cmake_lint_cmake ament_cmake_mypy ament_cmake_pclint ament_cmake_pep257 ament_cmake_pycodestyle ament_cmake_pyflakes ament_cmake_pytest ament_cmake_python ament_cmake_ros ament_cmake_ros_core ament_cmake_target_dependencies ament_cmake_test ament_cmake_uncrustify ament_cmake_vendor_package ament_cmake_version ament_cmake_xmllint ament_copyright ament_cppcheck ament_cpplint ament_flake8 ament_index_python ament_lint ament_lint_auto ament_lint_cmake ament_lint_common ament_mypy ament_pep257 ament_pycodestyle ament_pyflakes ament_uncrustify ament_xmllint domain_coordinator gmock_vendor gtest_vendor rmw_test_fixture
+make: *** [libmicroros.mk:38: /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/micro_ros_dev/install] Error 1

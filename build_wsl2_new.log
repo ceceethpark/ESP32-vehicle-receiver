@@ -1,0 +1,136 @@
+=======================================
+micro-ROS WSL2 빌드 시작
+=======================================
+
+1단계: 이전 빌드 정리 중...
+2단계: ESP-IDF 환경 설정 중...
+ESP-IDF 경로: /home/p/esp/esp-idf
+Detecting the Python interpreter
+Checking "python3" ...
+Python 3.10.12
+"python3" has been detected
+Checking Python compatibility
+Checking other ESP-IDF version.
+Adding ESP-IDF tools to PATH...
+Checking if Python packages are up to date...
+Python requirements are satisfied.
+Constraint file: /home/p/.espressif/espidf.constraints.v5.2.txt
+Requirement files:
+ - /home/p/esp/esp-idf/tools/requirements/requirements.core.txt
+Python being checked: /home/p/.espressif/python_env/idf5.2_py3.10_env/bin/python
+Added the following directories to PATH:
+  /home/p/esp/esp-idf/components/espcoredump
+  /home/p/esp/esp-idf/components/partition_table
+  /home/p/esp/esp-idf/components/app_update
+  /home/p/.espressif/tools/xtensa-esp-elf-gdb/12.1_20231023/xtensa-esp-elf-gdb/bin
+  /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin
+  /home/p/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin
+  /home/p/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin
+  /home/p/.espressif/tools/xtensa-esp-elf-gdb/12.1_20231023/xtensa-esp-elf-gdb/bin
+  /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin
+  /home/p/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin
+  /home/p/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin
+  /home/p/.espressif/python_env/idf5.2_py3.10_env/bin
+  /home/p/esp/esp-idf/tools
+Done! You can now compile ESP-IDF projects.
+Go to the project directory and run:
+
+  idf.py build
+
+3단계: 툴체인 경로 설정 중...
+툴체인: /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf
+컴파일러: /home/p/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc
+4단계: micro-ROS 빌드 시작 (15-20분 소요)...
+rm -f /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/esp32_toolchain.cmake; \
+cat /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/esp32_toolchain.cmake.in | \
+	sed "s/@CMAKE_C_COMPILER@/\/home\/p\/.espressif\/tools\/xtensa-esp-elf\/esp-13.2.0_20230928\/xtensa-esp-elf\/bin\/xtensa-esp32-elf-gcc/g" | \
+	sed "s/@CMAKE_CXX_COMPILER@/\/home\/p\/.espressif\/tools\/xtensa-esp-elf\/esp-13.2.0_20230928\/xtensa-esp-elf\/bin\/xtensa-esp32-elf-g++/g" | \
+	sed "s/@CFLAGS@/ -ffunction-sections -fdata-sections/g" | \
+	sed "s/@CXXFLAGS@/ -ffunction-sections -fdata-sections/g" | \
+	sed "s/@IDF_TARGET@/esp32/g" | \
+	sed "s/@IDF_PATH@/\/home\/p\/esp\/esp-idf/g" | \
+	sed "s/@BUILD_CONFIG_DIR@/\/mnt\/c\/Users\/thpark\/SynologyDrive\/6k2jvr_work\/prj_ESP32\/esp32_micro_hub\/components\/micro_ros_espidf_component\/build\/config/g" \
+	> /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/esp32_toolchain.cmake
+rm -rf micro_ros_dev; \
+mkdir micro_ros_dev; cd micro_ros_dev; \
+git clone -b kilted https://github.com/ament/ament_cmake src/ament_cmake; \
+git clone -b kilted https://github.com/ament/ament_lint src/ament_lint; \
+git clone -b kilted https://github.com/ament/ament_package src/ament_package; \
+git clone -b kilted https://github.com/ament/googletest src/googletest; \
+git clone -b kilted https://github.com/ros2/ament_cmake_ros src/ament_cmake_ros; \
+git clone -b kilted https://github.com/ament/ament_index src/ament_index; \
+touch src/ament_cmake_ros/rmw_test_fixture_implementation/COLCON_IGNORE; \
+colcon build --cmake-args -DBUILD_TESTING=OFF -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=gcc;
+Cloning into 'src/ament_cmake'...
+Updating files:  69% (166/238)Updating files:  70% (167/238)Updating files:  71% (169/238)Updating files:  72% (172/238)Updating files:  73% (174/238)Updating files:  74% (177/238)Updating files:  75% (179/238)Updating files:  76% (181/238)Updating files:  77% (184/238)Updating files:  78% (186/238)Updating files:  79% (189/238)Updating files:  80% (191/238)Updating files:  81% (193/238)Updating files:  82% (196/238)Updating files:  83% (198/238)Updating files:  84% (200/238)Updating files:  85% (203/238)Updating files:  86% (205/238)Updating files:  87% (208/238)Updating files:  88% (210/238)Updating files:  89% (212/238)Updating files:  90% (215/238)Updating files:  91% (217/238)Updating files:  92% (219/238)Updating files:  93% (222/238)Updating files:  94% (224/238)Updating files:  95% (227/238)Updating files:  96% (229/238)Updating files:  97% (231/238)Updating files:  98% (234/238)Updating files:  99% (236/238)Updating files: 100% (238/238)Updating files: 100% (238/238), done.
+Cloning into 'src/ament_lint'...
+Updating files:  48% (178/365)Updating files:  49% (179/365)Updating files:  50% (183/365)Updating files:  51% (187/365)Updating files:  52% (190/365)Updating files:  53% (194/365)Updating files:  54% (198/365)Updating files:  55% (201/365)Updating files:  56% (205/365)Updating files:  57% (209/365)Updating files:  58% (212/365)Updating files:  59% (216/365)Updating files:  60% (219/365)Updating files:  61% (223/365)Updating files:  62% (227/365)Updating files:  63% (230/365)Updating files:  64% (234/365)Updating files:  65% (238/365)Updating files:  66% (241/365)Updating files:  67% (245/365)Updating files:  68% (249/365)Updating files:  69% (252/365)Updating files:  70% (256/365)Updating files:  71% (260/365)Updating files:  72% (263/365)Updating files:  73% (267/365)Updating files:  74% (271/365)Updating files:  75% (274/365)Updating files:  76% (278/365)Updating files:  77% (282/365)Updating files:  78% (285/365)Updating files:  79% (289/365)Updating files:  80% (292/365)Updating files:  81% (296/365)Updating files:  82% (300/365)Updating files:  83% (303/365)Updating files:  84% (307/365)Updating files:  85% (311/365)Updating files:  86% (314/365)Updating files:  86% (317/365)Updating files:  87% (318/365)Updating files:  88% (322/365)Updating files:  89% (325/365)Updating files:  90% (329/365)Updating files:  91% (333/365)Updating files:  92% (336/365)Updating files:  93% (340/365)Updating files:  94% (344/365)Updating files:  95% (347/365)Updating files:  96% (351/365)Updating files:  97% (355/365)Updating files:  98% (358/365)Updating files:  99% (362/365)Updating files: 100% (365/365)Updating files: 100% (365/365), done.
+Cloning into 'src/ament_package'...
+Cloning into 'src/googletest'...
+Updating files:  63% (161/255)Updating files:  64% (164/255)Updating files:  65% (166/255)Updating files:  66% (169/255)Updating files:  67% (171/255)Updating files:  68% (174/255)Updating files:  69% (176/255)Updating files:  70% (179/255)Updating files:  71% (182/255)Updating files:  72% (184/255)Updating files:  73% (187/255)Updating files:  74% (189/255)Updating files:  75% (192/255)Updating files:  76% (194/255)Updating files:  77% (197/255)Updating files:  78% (199/255)Updating files:  79% (202/255)Updating files:  80% (204/255)Updating files:  81% (207/255)Updating files:  82% (210/255)Updating files:  83% (212/255)Updating files:  84% (215/255)Updating files:  85% (217/255)Updating files:  86% (220/255)Updating files:  87% (222/255)Updating files:  88% (225/255)Updating files:  89% (227/255)Updating files:  90% (230/255)Updating files:  91% (233/255)Updating files:  92% (235/255)Updating files:  93% (238/255)Updating files:  94% (240/255)Updating files:  95% (243/255)Updating files:  96% (245/255)Updating files:  97% (248/255)Updating files:  98% (250/255)Updating files:  99% (253/255)Updating files: 100% (255/255)Updating files: 100% (255/255), done.
+Cloning into 'src/ament_cmake_ros'...
+Cloning into 'src/ament_index'...
+Updating files:  93% (86/92)Updating files:  94% (87/92)Updating files:  95% (88/92)Updating files:  96% (89/92)Updating files:  97% (90/92)Updating files:  98% (91/92)Updating files: 100% (92/92)Updating files: 100% (92/92), done.
+Starting >>> ament_package
+Starting >>> ament_lint
+Starting >>> gtest_vendor
+Finished <<< ament_lint [4.20s]
+Starting >>> ament_flake8
+--- stderr: gtest_vendor
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+gmake[1]: Warning: File 'Makefile' has modification time 0.32 s in the future
+gmake[2]: Warning: File 'CMakeFiles/Makefile2' has modification time 0.33 s in the future
+gmake[2]: warning:  Clock skew detected.  Your build may be incomplete.
+gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
+---
+Finished <<< gtest_vendor [6.28s]
+Starting >>> gmock_vendor
+Finished <<< ament_package [8.61s]
+Starting >>> ament_cmake_core
+Finished <<< ament_flake8 [6.79s]
+Starting >>> ament_pep257
+--- stderr: gmock_vendor
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+    CMAKE_CXX_COMPILER
+    CMAKE_C_COMPILER
+
+
+---
+Finished <<< gmock_vendor [5.02s]
+--- stderr: ament_cmake_core
+Traceback (most recent call last):
+  File "/mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/micro_ros_dev/src/ament_cmake/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>
+    from catkin_pkg.package import parse_package_string
+ModuleNotFoundError: No module named 'catkin_pkg'
+CMake Error at cmake/core/ament_package_xml.cmake:95 (message):
+  
+  execute_process(/home/p/.espressif/python_env/idf5.2_py3.10_env/bin/python3
+  /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/micro_ros_dev/src/ament_cmake/ament_cmake_core/cmake/core/package_xml_2_cmake.py
+  /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/micro_ros_dev/src/ament_cmake/ament_cmake_core/package.xml
+  /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/micro_ros_dev/build/ament_cmake_core/ament_cmake_core/package.cmake)
+  returned error code 1
+Call Stack (most recent call first):
+  cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)
+  CMakeLists.txt:15 (ament_package_xml)
+
+
+---
+Failed   <<< ament_cmake_core [3.20s, exited with code 1]
+Aborted  <<< ament_pep257 [0.89s]
+
+Summary: 5 packages finished [15.8s]
+  1 package failed: ament_cmake_core
+  1 package aborted: ament_pep257
+  3 packages had stderr output: ament_cmake_core gmock_vendor gtest_vendor
+  55 packages not processed
+make: *** [libmicroros.mk:38: /mnt/c/Users/thpark/SynologyDrive/6k2jvr_work/prj_ESP32/esp32_micro_hub/components/micro_ros_espidf_component/micro_ros_dev/install] Error 1
