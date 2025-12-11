@@ -1,6 +1,9 @@
-﻿# ESP32 Micro Hub - 차량 수신기 (ESP-NOW + CAN + LCD)
+﻿# ESP32 Micro Hub - 차량 수신기 (ESP-NOW + micro-ROS + CAN + LCD)
 
 ESP32 WROOM 모듈을 사용한 ESP-NOW 및 CAN 통신 기반 운반차 수신기 프로젝트입니다.
+
+**최종 업데이트**: 2025-12-11  
+**상태**: ✅ micro-ROS 통합 완료 (빌드 성공, 테스트 대기)
 
 ## 📋 프로젝트 개요
 
@@ -9,6 +12,7 @@ ESP32 WROOM 모듈을 사용한 ESP-NOW 및 CAN 통신 기반 운반차 수신�
 - **제어**: CAN 통신으로 운반차 드라이버(STM32) 제어
 - **표시**: LCD에 차량 상태 표시 (배터리, 온도, 속도 등)
 - **통신**: ESP-NOW로 리모컨에 상태 정보 전송
+- **ROS2 통합**: micro-ROS로 ESP-NOW 데이터를 ROS2 토픽으로 발행
 - **클래스 기반 모듈 구조**: 간결하고 확장 가능한 설계
 
 ## 🏗️ 시스템 구조

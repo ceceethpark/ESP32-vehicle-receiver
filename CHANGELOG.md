@@ -1,5 +1,45 @@
 # ESP32 리모컨 프로젝트 - 업데이트 노트
 
+## 2025-12-11 업데이트
+
+### ✨ micro-ROS 통합 완료
+
+#### 1. WSL2에서 libmicroros.a 빌드 성공
+- **환경**: WSL2 Ubuntu-22.04 + ESP-IDF v5.2
+- **빌드 시간**: 58분 12초
+- **패키지**: 75개 완료 (micro_ros_dev 60개 + micro_ros_src 75개)
+- **결과**: libmicroros.a (18MB) + include/ (헤더 파일)
+
+#### 2. 주요 문제 해결
+- **VERSION/SOVERSION CMake 오류**: Micro-XRCE-DDS-Client CMakeLists.txt 321-324줄 삭제
+- **POSIX transport 오류**: UDP/SERIAL 비활성화, CUSTOM_TRANSPORT 활성화
+- **자동 재빌드 방지**: CMakeLists.txt에 libmicroros.a 존재 확인 로직 추가
+
+#### 3. ESP32 프로젝트 통합
+- **CUSTOM_TRANSPORT 구현**: UART1 (GPIO16/17) @ 921600 bps
+  - `uart_transport_open/close/write/read` 4개 함수
+- **micro-ROS 초기화**: node, publisher 생성
+- **ESP-NOW → ROS2 발행**: `/espnow_button` 토픽 (std_msgs/Int32)
+- **Agent 연결 대기**: `rmw_uros_ping_agent()` 루프
+
+#### 4. 최종 빌드 결과
+- **RAM**: 43,504 bytes (13.3% / 327,680 bytes) - micro-ROS 전: 10.0%
+- **Flash**: 804,477 bytes (76.7% / 1,048,576 bytes) - micro-ROS 전: 72.3%
+- **증가량**: RAM +10,768 bytes, Flash +45,976 bytes
+- **상태**: ✅ 빌드 성공, 메모리 충분
+
+#### 5. 문서 추가
+- `docs/micro-ros-build-issues.md`: 빌드 문제 해결 상세 기록
+- `docs/microros-integration-complete.md`: 통합 완료 및 테스트 가이드
+
+#### 6. 다음 단계
+- ESP32 펌웨어 플래시
+- micro-ROS Agent 연결 테스트 (라즈베리파이 5 또는 PC)
+- ESP-NOW 리모컨 데이터 → ROS2 토픽 확인
+- LiDAR, Encoder, LCD, CAN 추가
+
+---
+
 ## 2025-12-10 업데이트
 
 ### ✨ Serial 출력 표준화 및 UI 재설계
