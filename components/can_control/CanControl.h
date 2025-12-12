@@ -46,6 +46,7 @@ public:
     // 응답 데이터 콜백
     typedef void (*ResponseCallback)(const uint8_t* data, uint8_t len);
     typedef void (*StatusCallback)(const VehicleStatusData& status);
+    typedef void (*LcdUpdateCallback)(int16_t volt_main, uint8_t soc, int16_t motor_temp, int16_t current_avg, int16_t fet_temp);
     
     // 생성자
     CanControl(gpio_num_t tx_pin, gpio_num_t rx_pin);
@@ -54,6 +55,10 @@ public:
     // 초기화/종료
     esp_err_t begin(uint32_t bitrate = 500000);
     void end();
+    
+    // 통합 초기화 (콜백 포함)
+    esp_err_t initialize(uint32_t bitrate, StatusCallback status_cb, LcdUpdateCallback lcd_cb, 
+                        uint32_t stack_size = 4096, UBaseType_t priority = 4);
     
     // 명령 전송 (STM32 tja1050 기반)
     esp_err_t sendMotorCommand(uint8_t speed, uint8_t direction);
@@ -71,6 +76,7 @@ public:
     // 콜백 설정
     void setResponseCallback(ResponseCallback callback);
     void setStatusCallback(StatusCallback callback);
+    void setLcdUpdateCallback(LcdUpdateCallback callback);
     
     // 수신 태스크 관리
     esp_err_t startRxTask(uint32_t stack_size = 4096, UBaseType_t priority = 4);
@@ -110,6 +116,7 @@ private:
     // 콜백
     ResponseCallback response_callback_;
     StatusCallback status_callback_;
+    LcdUpdateCallback lcd_update_callback_;
     
     // FreeRTOS 태스크
     TaskHandle_t rx_task_handle_;

@@ -21,6 +21,9 @@ public:
     
     // 초기화
     esp_err_t begin();
+    
+    // 통합 초기화 (성공 표시 포함)
+    esp_err_t initialize();
     void end();
     
     // 기본 제어

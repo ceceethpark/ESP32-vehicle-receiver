@@ -1,6 +1,131 @@
 # ESP32 리모컨 프로젝트 - 업데이트 노트
 
-## 2024-12-11 업데이트 (최신)
+## 2024-12-12 업데이트 (최신)
+
+### 🏗️ 아키텍처 단순화 및 통합 초기화
+
+#### 1. PCA9555 I2C 드라이버 통합
+**변경 전**: 
+- 독립된 `pca9555_driver` 컴포넌트 (500+ 줄)
+- 2단계 초기화 (드라이버 → ButtonControl)
+- main.cpp에서 `Pca9555Driver` 객체 관리
+
+**변경 후**:
+- PCA9555 I2C 코드를 `ButtonControl`에 직접 통합 (~80 줄)
+- 1단계 초기화: `button_control.initializeI2C()`
+- main.cpp 전역 객체 9개 → 8개로 축소
+
+```cpp
+// Before: 2-step initialization
+static Pca9555Driver pca9555(PCA9555_I2C_ADDR);
+pca9555.begin(I2C_NUM_0, GPIO_21, GPIO_22, 400000);
+button_control.initializeI2C(&pca9555, pca_buttons, 6, callback, nullptr);
+
+// After: 1-step initialization
+button_control.initializeI2C(
+    I2C_NUM_0, GPIO_21, GPIO_22, 0x20,
+    pca_buttons, 6, callback, nullptr
+);
+```
+
+**이점**:
+- 컴포넌트 개수 감소 (11 → 10)
+- 의존성 단순화 (ButtonControl only requires `driver`)
+- 사용자 친화적 API (한 번의 호출로 완료)
+- 코드 캡슐화 (I2C 세부사항 ButtonControl 내부로 은닉)
+
+#### 2. WifiControl 컴포넌트 추가
+- WiFi 초기화 로직을 main.cpp에서 분리
+- ESP-NOW 필수 의존성 관리 개선
+- `wifi_control.initialize(WIFI_MODE_STA)` 한 번의 호출로 완료
+
+#### 3. TaskManager 컴포넌트 추가
+- FreeRTOS Task 관리 통합
+- UI Task와 ROS Task 내장 함수 제공
+- Task 통계 및 모니터링 기능
+
+```cpp
+task_manager.createUiTask(&lcd_control, LCD_UPDATE_INTERVAL_MS, 
+                          LCD_UI_TASK_STACK_SIZE, LCD_UI_TASK_PRIORITY);
+task_manager.createRosTask(&ros_bridge, &lcd_control, 
+                           ROS_TASK_STACK_SIZE, ROS_TASK_PRIORITY);
+```
+
+#### 4. 통합 initialize() 메서드 추가
+모든 컴포넌트에 콜백 및 자동 Task 시작을 포함한 `initialize()` 메서드 추가:
+
+- `RosBridge::initialize(node_name, topic_name)` - Publisher 생성 포함
+- `LcdControl::initialize(initial_mode, connection_status)` - 초기 화면 표시
+- `LedControl::initialize()` - 성공 LED 표시
+- `CanControl::initialize(bitrate, status_cb, lcd_cb, ...)` - RX Task 시작 포함
+- `EspNowControl::initialize(channel, cmd_callback, ...)` - RX Task 시작 포함
+- `ButtonControl::initializeI2C(...)` - PCA9555 + Scan Task 시작
+
+#### 5. 듀얼 버튼 시스템 완성
+**로컬 버튼 (PCA9555 I2C)**:
+- 포트: IOI_0~IOI_5 (6개)
+- ROS 토픽: 100~105번
+- Active LOW with internal pullup
+- ButtonCallback으로 이벤트 처리
+
+**원격 버튼 (ESP-NOW)**:
+- 명령: 1~6번 (전진/후진/정지/리프트/캐스터 등)
+- ROS 토픽: 1~6번
+- EspNowControl 내부에서 CAN 명령 자동 전송
+
+#### 6. main.cpp 구조 개선
+**3단계 초기화 패턴**:
+```cpp
+// Phase 1: 기본 인프라
+wifi_control.initialize();
+led_control.initialize();
+lcd_control.initialize("BOOTING", false);
+
+// Phase 2: 통신 컴포넌트 (의존성 순서 고려)
+ros_bridge.initialize("esp32_micro_hub", "espnow_button");
+button_control.initializeI2C(...);  // PCA9555 통합
+can_control.initialize(500000, status_cb, lcd_cb, ...);
+
+// Phase 3: ESP-NOW (의존성 주입)
+espnow_control.begin(1);
+espnow_control.setRosBridge(&ros_bridge);
+espnow_control.setCanControl(&can_control);
+espnow_control.startRxTask(...);
+
+// Task 시작
+task_manager.createUiTask(...);
+task_manager.createRosTask(...);
+```
+
+#### 7. 코드 메트릭스
+- **main.cpp**: 340줄 → 230줄 (32% 감소)
+- **전역 객체**: 9개 → 8개
+- **컴포넌트**: 11개 → 10개
+- **ButtonControl**: I2C 통신 코드 ~80줄 추가 (총 ~400줄)
+- **삭제된 파일**: 
+  * `components/pca9555_driver/` (전체 디렉토리)
+  * `pca9555_driver/Pca9555Driver.h/cpp` (~500줄)
+  * `pca9555_driver/CMakeLists.txt`
+
+#### 8. 콜백 아키텍처 개선
+**CAN 듀얼 콜백**:
+- `StatusCallback`: ROS 발행
+- `LcdUpdateCallback`: LCD 실시간 업데이트
+
+**ESP-NOW 내부 처리**:
+- ROS 발행 자동화
+- CAN 명령 자동 전송
+- ButtonCommandCallback (레거시)
+- CommandProcessCallback (추가 처리)
+
+#### 9. 에러 처리 통일
+- **Critical**: `ESP_ERROR_CHECK()` 사용 (NVS, WiFi)
+- **Non-critical**: `ESP_LOGW()` + continue (LCD, ROS, CAN)
+- 시스템 안정성 향상 (일부 컴포넌트 실패해도 계속 동작)
+
+---
+
+## 2024-12-11 업데이트
 
 ### 🚗 CAN Control 시스템 완전 재작성 (STM32 tja1050 기반)
 

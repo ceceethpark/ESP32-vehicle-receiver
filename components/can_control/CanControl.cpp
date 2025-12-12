@@ -10,6 +10,7 @@ CanControl::CanControl(gpio_num_t tx_pin, gpio_num_t rx_pin)
     , can_alive_timeout_(0)
     , response_callback_(nullptr)
     , status_callback_(nullptr)
+    , lcd_update_callback_(nullptr)
     , rx_task_handle_(nullptr)
     , rx_task_running_(false)
 {
@@ -76,6 +77,28 @@ void CanControl::end() {
     
     initialized_ = false;
     ESP_LOGI(TAG, "CAN terminated");
+}
+
+esp_err_t CanControl::initialize(uint32_t bitrate, StatusCallback status_cb, LcdUpdateCallback lcd_cb,
+                                 uint32_t stack_size, UBaseType_t priority)
+{
+    esp_err_t ret = begin(bitrate);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "CAN begin failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    setStatusCallback(status_cb);
+    setLcdUpdateCallback(lcd_cb);
+    
+    ret = startRxTask(stack_size, priority);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "CAN RX task start failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    ESP_LOGI(TAG, "CAN fully initialized (bitrate: %lu Kbps)", bitrate / 1000);
+    return ESP_OK;
 }
 
 esp_err_t CanControl::sendMotorCommand(uint8_t speed, uint8_t direction) {
@@ -145,6 +168,10 @@ void CanControl::setResponseCallback(ResponseCallback callback) {
 
 void CanControl::setStatusCallback(StatusCallback callback) {
     status_callback_ = callback;
+}
+
+void CanControl::setLcdUpdateCallback(LcdUpdateCallback callback) {
+    lcd_update_callback_ = callback;
 }
 
 esp_err_t CanControl::startRxTask(uint32_t stack_size, UBaseType_t priority) {
@@ -257,11 +284,22 @@ void CanControl::updateVehicleStatus() {
     vehicle_status_.soc = can_rx_buf_[3][0];
     vehicle_status_.error_code = can_rx_buf_[3][1];
     
-    ESP_LOGD(TAG, "Vehicle status updated: Volt=%dmV, Current=%dmA, Temp=%d°C, SOC=%d%%",
-             vehicle_status_.volt_main, vehicle_status_.current_avg, 
-             vehicle_status_.motor_temp, vehicle_status_.soc);
+    // 로그 출력
+    ESP_LOGI(TAG, "CAN Status - VMain:%d DCDC:%d Curr:%d Cons:%d MotorT:%d FetT:%d SOC:%d Err:%d",
+             vehicle_status_.volt_main, vehicle_status_.volt_dcdc, 
+             vehicle_status_.current_avg, vehicle_status_.consumption,
+             vehicle_status_.motor_temp, vehicle_status_.fet_temp, 
+             vehicle_status_.soc, vehicle_status_.error_code);
     
+    // StatusCallback 호출 (ROS 등)
     if (status_callback_) {
         status_callback_(vehicle_status_);
+    }
+    
+    // LCD 업데이트 콜백 호출
+    if (lcd_update_callback_) {
+        lcd_update_callback_(vehicle_status_.volt_main, vehicle_status_.soc,
+                            vehicle_status_.motor_temp, vehicle_status_.current_avg,
+                            vehicle_status_.fet_temp);
     }
 }

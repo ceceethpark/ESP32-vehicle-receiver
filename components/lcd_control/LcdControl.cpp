@@ -99,6 +99,22 @@ esp_err_t LcdControl::begin() {
     return ESP_OK;
 }
 
+esp_err_t LcdControl::initialize(const char* initial_mode, bool connection_status)
+{
+    esp_err_t ret = begin();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "LCD begin failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    drawMainScreen();
+    updateControlMode(initial_mode);
+    updateConnectionStatus(connection_status);
+    
+    ESP_LOGI(TAG, "LCD fully initialized (mode: %s, connected: %d)", initial_mode, connection_status);
+    return ESP_OK;
+}
+
 void LcdControl::end() {
     stopUITask();
     

@@ -51,6 +51,9 @@ public:
     // 초기화
     esp_err_t begin();
     void end();
+    
+    // 통합 초기화 (초기 화면 표시 포함)
+    esp_err_t initialize(const char* initial_mode, bool connection_status);
     bool isInitialized() const { return initialized_; }
     
     // 기본 제어

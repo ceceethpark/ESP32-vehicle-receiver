@@ -103,6 +103,24 @@ esp_err_t RosBridge::begin(const char* node_name) {
     return ESP_OK;
 }
 
+esp_err_t RosBridge::initialize(const char* node_name, const char* topic_name)
+{
+    esp_err_t ret = begin(node_name);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "ROS bridge begin failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    ret = createPublisher(topic_name);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Publisher creation failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    ESP_LOGI(TAG, "ROS bridge fully initialized (topic: %s)", topic_name);
+    return ESP_OK;
+}
+
 void RosBridge::end() {
     if (initialized_) {
         rcl_publisher_fini(&publisher_, &node_);

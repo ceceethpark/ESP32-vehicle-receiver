@@ -34,6 +34,20 @@ esp_err_t LedControl::begin() {
     return ESP_OK;
 }
 
+esp_err_t LedControl::initialize()
+{
+    esp_err_t ret = begin();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "LED begin failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    showSuccess();  // 초기화 성공 표시
+    
+    ESP_LOGI(TAG, "LED fully initialized");
+    return ESP_OK;
+}
+
 void LedControl::end() {
     off();
     gpio_reset_pin(led_pin_);

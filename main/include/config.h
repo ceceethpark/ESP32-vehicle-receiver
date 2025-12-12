@@ -78,10 +78,6 @@
 #define BTN_UP                  PCA_IOI_4       // UP 버튼
 #define BTN_POWER               PCA_IOI_5       // POWER 버튼 (pI_PWR_N)
 
-// ESP32 Direct GPIO Buttons (백업/추가 버튼용)
-#define BTN_EMERGENCY_PIN       GPIO_NUM_34     // Input only (비상정지)
-#define BTN_RUN_PIN             GPIO_NUM_35     // Input only (실행/정지)
-
 // ==========================================
 // ROS Configuration
 // ==========================================

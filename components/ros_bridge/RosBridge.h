@@ -24,6 +24,9 @@ public:
     esp_err_t begin(const char* node_name = "esp32_micro_hub");
     void end();
     
+    // 통합 초기화 (퍼블리셔 생성 포함)
+    esp_err_t initialize(const char* node_name, const char* topic_name);
+    
     // 퍼블리셔 생성
     esp_err_t createPublisher(const char* topic_name);
     
